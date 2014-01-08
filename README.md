@@ -1,8 +1,10 @@
 CollisionDetectionTest
 ======================
 
-cocos2d-x(Ver2.1.4想定)上での当り判定走査を効率的に行う(判定回数を減らす)ための  
+cocos2d-x上での当り判定走査を効率的に行う(判定回数を減らす)ための  
 CollisionDetectionクラスの動作確認、デモ用のプロジェクト  
+
+※cocos2d-xのバージョンは2.1.4前提です
 
 アルゴリズム、実装は下記記事を参考に、しています。  
 [その８ 4分木空間分割を最適化する！（理屈編）](http://marupeke296.com/COL_2D_No8_QuadTree.html)
