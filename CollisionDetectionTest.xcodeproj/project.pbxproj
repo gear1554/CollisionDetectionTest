@@ -10,12 +10,6 @@
 		0006A5251877747D0048DDD3 /* default_font.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 0006A5231877747D0048DDD3 /* default_font.fnt */; };
 		0006A5261877747D0048DDD3 /* default_font.png in Resources */ = {isa = PBXBuildFile; fileRef = 0006A5241877747D0048DDD3 /* default_font.png */; };
 		0075123A1815E94300DDD2E7 /* fileLookup.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007512341815E94300DDD2E7 /* fileLookup.plist */; };
-		007512581815EA0300DDD2E7 /* ccbDefaultImages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0075124E1815EA0300DDD2E7 /* ccbDefaultImages.plist */; };
-		007512591815EA0300DDD2E7 /* ccbDefaultImages.png in Resources */ = {isa = PBXBuildFile; fileRef = 0075124F1815EA0300DDD2E7 /* ccbDefaultImages.png */; };
-		0075125A1815EA0300DDD2E7 /* ccbParticleFire.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512501815EA0300DDD2E7 /* ccbParticleFire.png */; };
-		0075125B1815EA0300DDD2E7 /* ccbParticleSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512511815EA0300DDD2E7 /* ccbParticleSmoke.png */; };
-		0075125C1815EA0300DDD2E7 /* ccbParticleSnow.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512521815EA0300DDD2E7 /* ccbParticleSnow.png */; };
-		0075125D1815EA0300DDD2E7 /* ccbParticleStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512531815EA0300DDD2E7 /* ccbParticleStars.png */; };
 		007512651815F90500DDD2E7 /* clickme-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512631815F90500DDD2E7 /* clickme-down.png */; };
 		007512661815F90500DDD2E7 /* clickme.png in Resources */ = {isa = PBXBuildFile; fileRef = 007512641815F90500DDD2E7 /* clickme.png */; };
 		008A759417BF0F6300DE9580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A759317BF0F6300DE9580 /* QuartzCore.framework */; };
@@ -302,12 +296,6 @@
 		0006A5231877747D0048DDD3 /* default_font.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = default_font.fnt; path = Resources/default_font.fnt; sourceTree = "<group>"; };
 		0006A5241877747D0048DDD3 /* default_font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_font.png; path = Resources/default_font.png; sourceTree = "<group>"; };
 		007512341815E94300DDD2E7 /* fileLookup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fileLookup.plist; path = Resources/fileLookup.plist; sourceTree = "<group>"; };
-		0075124E1815EA0300DDD2E7 /* ccbDefaultImages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ccbDefaultImages.plist; sourceTree = "<group>"; };
-		0075124F1815EA0300DDD2E7 /* ccbDefaultImages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ccbDefaultImages.png; sourceTree = "<group>"; };
-		007512501815EA0300DDD2E7 /* ccbParticleFire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ccbParticleFire.png; sourceTree = "<group>"; };
-		007512511815EA0300DDD2E7 /* ccbParticleSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ccbParticleSmoke.png; sourceTree = "<group>"; };
-		007512521815EA0300DDD2E7 /* ccbParticleSnow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ccbParticleSnow.png; sourceTree = "<group>"; };
-		007512531815EA0300DDD2E7 /* ccbParticleStars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ccbParticleStars.png; sourceTree = "<group>"; };
 		007512631815F90500DDD2E7 /* clickme-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clickme-down.png"; path = "Resources/clickme-down.png"; sourceTree = "<group>"; };
 		007512641815F90500DDD2E7 /* clickme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clickme.png; path = Resources/clickme.png; sourceTree = "<group>"; };
 		008A759017BF0F6300DE9580 /* CollisionDetectionTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollisionDetectionTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -934,28 +922,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0075124D1815EA0300DDD2E7 /* ccbResources */ = {
-			isa = PBXGroup;
-			children = (
-				0075124E1815EA0300DDD2E7 /* ccbDefaultImages.plist */,
-				0075124F1815EA0300DDD2E7 /* ccbDefaultImages.png */,
-				007512501815EA0300DDD2E7 /* ccbParticleFire.png */,
-				007512511815EA0300DDD2E7 /* ccbParticleSmoke.png */,
-				007512521815EA0300DDD2E7 /* ccbParticleSnow.png */,
-				007512531815EA0300DDD2E7 /* ccbParticleStars.png */,
-				007512541815EA0300DDD2E7 /* resources-large */,
-			);
-			name = ccbResources;
-			path = Resources/ccbResources;
-			sourceTree = "<group>";
-		};
-		007512541815EA0300DDD2E7 /* resources-large */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "resources-large";
-			sourceTree = "<group>";
-		};
 		008A758717BF0F6300DE9580 = {
 			isa = PBXGroup;
 			children = (
@@ -1004,7 +970,6 @@
 		008A75A417BF0F6300DE9580 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0075124D1815EA0300DDD2E7 /* ccbResources */,
 				007512631815F90500DDD2E7 /* clickme-down.png */,
 				007512641815F90500DDD2E7 /* clickme.png */,
 				008A75A517BF0F6300DE9580 /* CloseNormal.png */,
@@ -2240,12 +2205,6 @@
 				008A765917BF0F6400DE9580 /* ChangeLog in Resources */,
 				008A77CD17BF0F6600DE9580 /* project.pbxproj in Resources */,
 				0075123A1815E94300DDD2E7 /* fileLookup.plist in Resources */,
-				007512581815EA0300DDD2E7 /* ccbDefaultImages.plist in Resources */,
-				007512591815EA0300DDD2E7 /* ccbDefaultImages.png in Resources */,
-				0075125A1815EA0300DDD2E7 /* ccbParticleFire.png in Resources */,
-				0075125B1815EA0300DDD2E7 /* ccbParticleSmoke.png in Resources */,
-				0075125C1815EA0300DDD2E7 /* ccbParticleSnow.png in Resources */,
-				0075125D1815EA0300DDD2E7 /* ccbParticleStars.png in Resources */,
 				007512651815F90500DDD2E7 /* clickme-down.png in Resources */,
 				007512661815F90500DDD2E7 /* clickme.png in Resources */,
 				0006A5261877747D0048DDD3 /* default_font.png in Resources */,
