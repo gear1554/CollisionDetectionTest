@@ -13,7 +13,8 @@ USING_NS_CC_EXT;
 class CollisionTestLayer :
 public CCLayer,
 public CCBSelectorResolver,
-public CCBMemberVariableAssigner
+public CCBMemberVariableAssigner,
+public CollisionDetactionDelegate
 {
 private:
     
@@ -38,6 +39,9 @@ public:
     virtual void onEnter();
     virtual void update(float dt);
     virtual void draw();
+    
+    virtual void onCollide(CollisionPair& collisionPair);
+    virtual bool detectCollision(CCNode* collisionObject1, CCNode* collisionObject2);
     
     void deleteObject( CCNode* obj );
     void setSpaceGridAndLabel();

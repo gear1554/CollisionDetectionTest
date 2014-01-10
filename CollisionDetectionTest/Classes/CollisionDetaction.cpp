@@ -1,8 +1,5 @@
 //
 //  CollisionDetaction.cpp
-//  
-//
-//  当たり判定管理クラス
 //
 //  Created by gear1554 on 2012/10/18.
 //
@@ -12,24 +9,18 @@
 
 USING_NS_CC;
 
-CollisionDetaction::CollisionDetaction(CCArray* _gameObjectArray, unsigned int spaceLevel){
+CollisionDetaction::CollisionDetaction(CollisionDetactionDelegate* _collisionDetectionDelegate,
+                                       CCArray* _gameObjectArray,
+                                       unsigned int spaceLevel){
     
+    collisionDetectionDelegate = _collisionDetectionDelegate;
     gameObjectArray = _gameObjectArray;
     spaceArray = CCArray::create();
     spaceArray->retain();
     
-    isCheckByBoundingBox = true;
-    uiLevel           = 0;
-    fW                = 0.0f;
-    fH                = 0.0f;
-    fLeft             = 0.0f;
-    fTop              = 0.0f;
-    fUnit_W           = 0.0f;
-    fUnit_H           = 0.0f;
-    dwCellNum         = 0;
-    
-    checkHitCount       = 0;
-    checkTreeSpaceCount = 0;
+    uiLevel = dwCellNum = 0;
+    fW = fH = fLeft = fTop = fUnit_W = fUnit_H = 0.0f;
+    checkHitCount =checkTreeSpaceCount = 0;
     
     int i;
     iPow[0] = 1;
@@ -176,6 +167,10 @@ void CollisionDetaction::update(){
     // Scan collision detection
     scanCollisionDetection(0, CCArray::createWithCapacity(0));
     
+    // Collision Handling
+    for(vector<CollisionPair>::iterator itr = hitObjectList.begin(); itr != hitObjectList.end(); ++itr){
+        collisionDetectionDelegate->onCollide(*itr);
+    }
 }
 
 
@@ -230,7 +225,7 @@ void CollisionDetaction::scanCollisionDetection(int spaceIndex, CCArray* stackAr
     bool childFlag = false;
     int ObjNum = 0;
     int nextSpaceIndex;
-    for(int i = 0; i<4; i++){
+    for(register int i = 0; i<4; i++){
         nextSpaceIndex = spaceIndex * 4 + 1 + i;
         if(isHavingChildSpace(nextSpaceIndex)){
             if(!childFlag){
@@ -259,51 +254,29 @@ void CollisionDetaction::scanCollisionDetection(int spaceIndex, CCArray* stackAr
 
 void CollisionDetaction::checkHit(CCNode *collisionObject1, CCNode *collisionObject2){
     
-    if( isCheckByBoundingBox ?
-       isHitByBoundingBox(collisionObject1, collisionObject2) :
-       isHitByBoundingSphere(collisionObject1, collisionObject2)){
-        
+    if(collisionDetectionDelegate->detectCollision(collisionObject1, collisionObject2)){
         hitObjectList.push_back(CollisionPair(collisionObject1, collisionObject2));
     }
     checkHitCount++;
 }
 
-
-bool CollisionDetaction::isHitByBoundingBox(CCNode* collisionObject1, CCNode* collisionObject2){
-    
-    CCRect rect1 = collisionObject1->boundingBox();
-    CCRect rect2 = collisionObject2->boundingBox();
-    return rect1.intersectsRect(rect2);
-}
-
-bool CollisionDetaction::isHitByBoundingSphere(CCNode* collisionObject1, CCNode* collisionObject2){
-    
-    float dist = ccpDistance(collisionObject1->getPosition(), collisionObject2->getPosition());
-    return (dist < ((collisionObject1->getContentSize().width/2) + (collisionObject2->getContentSize().width/2)));
-}
-
 void CollisionDetaction::checkHitSpaceCell(CCArray* array1, CCArray* array2){
     
     if(array1 == array2){
-        for(int i = 0; i<array1->count(); i++){
-            for(int j = i + 1; j<array2->count(); j++){
+        for(register int i = 0; i<array1->count(); i++){
+            for(register int j = i + 1; j<array2->count(); j++){
                 if(j < array2->count()){
-                    CCSprite *collisionObject1 = (CCSprite*)array1->objectAtIndex(i);
-                    CCSprite *collisionObject2 = (CCSprite*)array2->objectAtIndex(j);
-                    checkHit(collisionObject1, collisionObject2);
+                    checkHit((CCNode*)array1->objectAtIndex(i), (CCNode*)array2->objectAtIndex(j));
                 }
             }
         }
     }else{
         CCObject *obj;
         CCARRAY_FOREACH(array1, obj){
-            CCSprite *collisionObject1 = (CCSprite*)obj;
             CCObject *obj2;
             CCARRAY_FOREACH(array2, obj2){
-                CCSprite *collisionObject2 = (CCSprite*)obj2;
-                
-                if(collisionObject1 != collisionObject2){
-                    checkHit(collisionObject1, collisionObject2);
+                if(obj != obj2){
+                    checkHit((CCNode*)obj, (CCNode*)obj2);
                 }
             }
         }
@@ -311,6 +284,5 @@ void CollisionDetaction::checkHitSpaceCell(CCArray* array1, CCArray* array2){
 }
 
 int CollisionDetaction::getSpaceNumBySpaceLevel(unsigned int spaceLevel){
-    
     return iPow[spaceLevel];
 }

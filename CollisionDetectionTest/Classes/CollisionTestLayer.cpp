@@ -31,7 +31,7 @@ bool CollisionTestLayer::init(){
     gameObjects = CCArray::create();
     
     // Create collisionDetaction
-    collisionDetaction = new CollisionDetaction(gameObjects, 3);
+    collisionDetaction = new CollisionDetaction(this, gameObjects, 3);
     
     // Create spaceLabel
     spaceLabelArray = CCArray::create();
@@ -62,16 +62,6 @@ void CollisionTestLayer::update(float dt){
     // Collision detection
     collisionDetaction->update();
     
-    // Collision Handling
-    for(int i = 0; i<collisionDetaction->getHitObjectList().size(); i++){
-        CCSprite *gameObject1 = (CCSprite*)collisionDetaction->getHitObjectList()[i].getObject1();
-        CCSprite *gameObject2 = (CCSprite*)collisionDetaction->getHitObjectList()[i].getObject2();
-        gameObject1->setColor(ccRED);
-        gameObject2->setColor(ccBLUE);
-        deleteObject(gameObject1);
-        deleteObject(gameObject2);
-    }
-    
     // Update label
     m_debugLabel->setString(CCString::createWithFormat("SpaceLevel:%d\nCheckHitCount:%d\nScanSpaceCount:%d\nHitObjectPair:%d\nGameObjectCount:%d\nDelayTime:%.04f",
                                                        collisionDetaction->getUiLevel(),
@@ -87,16 +77,29 @@ void CollisionTestLayer::update(float dt){
 void CollisionTestLayer::draw(){
     
     // Draw grid
-    if(CCDirector::sharedDirector()->getTotalFrames() % 4 == 0){
-        setSpaceGridAndLabel();
-    }
+    setSpaceGridAndLabel();
+}
+
+// Callback
+void CollisionTestLayer::onCollide(CollisionPair& collisionPair){
+    CCSprite *gameObject1 = (CCSprite*)collisionPair.getObject1();
+    CCSprite *gameObject2 = (CCSprite*)collisionPair.getObject2();
+    gameObject1->setColor(ccRED);
+    gameObject2->setColor(ccBLUE);
+    deleteObject(gameObject1);
+    deleteObject(gameObject2);
+}
+
+// Detect collision by bounding box
+bool CollisionTestLayer::detectCollision(CCNode* collisionObject1, CCNode* collisionObject2){
+    return collisionObject1->boundingBox().intersectsRect(collisionObject2->boundingBox());
 }
 
 // Delete game object(sprite)
 void CollisionTestLayer::deleteObject(CCNode *obj){
     if(gameObjects->containsObject(obj)){
         
-        gameObjects->removeObject(obj);
+        gameObjects->fastRemoveObject(obj);
         
         CCFadeOut *fade = CCFadeOut::create(0.2f);
         CCCallFuncND *func = CCCallFuncND::create(obj, callfuncND_selector(CCNode::removeFromParent), NULL);

@@ -17,7 +17,6 @@
 USING_NS_CC;
 using namespace std;
 
-
 class CollisionPair{
 private:
     CC_SYNTHESIZE(CCNode*, object1, Object1);
@@ -32,30 +31,51 @@ public:
     }
 };
 
+class CollisionDetactionDelegate
+{
+public:
+    /**
+     * Delegate to respond collision event
+     *
+     * @param collisionPair colliding things
+     */
+    virtual void onCollide(CollisionPair& collisionPair) = 0;
+    
+    /**
+     * Please implement a method to detect a collision
+     *
+     * @param CollisionObject1 node that may collided
+     * @param CollisionObject2 another node that may collided
+     */
+    virtual bool detectCollision(CCNode* collisionObject1, CCNode* collisionObject2) = 0;
+};
+
 
 class CollisionDetaction{
 
 public:
 
-    CollisionDetaction(CCArray *_gameObjecrtArray, unsigned int spaceLevel);
+    CollisionDetaction(CollisionDetactionDelegate* _collisionDetactionDelegate,
+                       CCArray *_gameObjecrtArray,
+                       unsigned int spaceLevel);
     ~CollisionDetaction();
     
-    CC_SYNTHESIZE(bool, isCheckByBoundingBox, IsCheckByBoundingBox)
-    CC_SYNTHESIZE(vector<CollisionPair>, hitObjectList, HitObjectList);
+    CC_SYNTHESIZE(CollisionDetactionDelegate*, collisionDetectionDelegate, CollisionDetactionDelegate);
+    CC_SYNTHESIZE(unsigned int, checkHitCount, CheckHitCount);
+    CC_SYNTHESIZE(unsigned int, checkTreeSpaceCount, CheckTreeSpaceCount);
+    CC_SYNTHESIZE(int, dwCellNum, DwCellNum);
+    CC_SYNTHESIZE(int, uiLevel, UiLevel);
     CC_SYNTHESIZE(float, fW, FW);
     CC_SYNTHESIZE(float, fH, FH);
     CC_SYNTHESIZE(float, fLeft, FLeft);
     CC_SYNTHESIZE(float, fTop, FTop);
     CC_SYNTHESIZE(float, fUnit_W, FUnit_W);
     CC_SYNTHESIZE(float, fUnit_H, FUnit_H);
+    
     CC_SYNTHESIZE(CCRect, spaceRect, SpaceRect);
-    CC_SYNTHESIZE(int, dwCellNum, DwCellNum);
-    CC_SYNTHESIZE(int, uiLevel, UiLevel);
     
+    CC_SYNTHESIZE(vector<CollisionPair>, hitObjectList, HitObjectList);
     CC_SYNTHESIZE(CCArray*, spaceArray, SpaceArray);
-    
-    CC_SYNTHESIZE(unsigned int, checkHitCount, CheckHitCount);
-    CC_SYNTHESIZE(unsigned int, checkTreeSpaceCount, CheckTreeSpaceCount);
     
     bool Init(int Level, float left, float top, float right, float bottom);
 
@@ -89,10 +109,6 @@ private:
     void scanCollisionDetection(int spaceIndex, CCArray* stackArray);
     
     void checkHit(CCNode* CollisionObject1, CCNode* collisionObject2);
-    
-    bool isHitByBoundingBox(CCNode* collisionObject1, CCNode* collisionObject2);
-    
-    bool isHitByBoundingSphere(CCNode* collisionObject1, CCNode* collisionObject2);
     
     void checkHitSpaceCell(CCArray* array1, CCArray* array2);
 };
