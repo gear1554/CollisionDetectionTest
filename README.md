@@ -15,7 +15,7 @@ CCTableViewのような感じで利用できます。
 
 1. CollisionDetection.hとCollisionDetection.cppを使用したいプロジェクトへ追加
 2. ヘッダーへの定義、初期化を行う
-  - 画面にはCollisionDetactionDelegateクラスを継承させてください
+  - 画面クラスにはCollisionDetactionDelegateクラスを継承させてください
   - コンストラクタの第1引数に判定を行いたい画面(CCLayer*)を指定してください
   - コンストラクタの第2引数に判定を行いたい対象の配列を指定してください
   - コンストラクタの第3引数に0～9の数値(空間の分割レベル)を指定してください(2～4推奨?)
@@ -46,7 +46,7 @@ CCTableViewのような感じで利用できます。
     collisionDetaction = new CollisionDetaction(this, gameObjects, 3);
   ```
 ***
-3. 毎フレーム処理を行う箇所でcollisionDetaction->update();を呼んでやる  
+3. 毎フレーム処理を行う箇所でcollisionDetaction->update();を呼んでください
   CollisionTestLayer.cpp
   ```C++
     // Inter-frame operation
@@ -63,32 +63,30 @@ CCTableViewのような感じで利用できます。
       */
     }
   ```
-4. 当ったと判定されたオブジェクトのペアの取得  
+4. 仮想関数を実装してください(onCollide detectCollision)
+***
+  CollisionTestLayer.h
+  ```C++
+    virtual void onCollide(CollisionPair& collisionPair); // 当った際の処理
+    virtual bool detectCollision(CCNode* collisionObject1, CCNode* collisionObject2); // 当っているかを判定
+  ```
+***
   CollisionTestLayer.cpp
   ```C++
-    // Inter-frame operation
-    void CollisionTestLayer::update(float dt){
-      /**
-          省略
-      */
-      
-      // Collision detection
-      collisionDetaction->update();
-
-      // Collision Handling
-      for(int i = 0; i<collisionDetaction->getHitObjectList().size(); i++){
-        // 当ったオブジェクトのペアの取得
-        CCSprite *gameObject1 = (CCSprite*)collisionDetaction->getHitObjectList()[i].getObject1();
-        CCSprite *gameObject2 = (CCSprite*)collisionDetaction->getHitObjectList()[i].getObject2();
-        // ここでは当ったオブジェクトの色を赤と青に変更し、消す処理をしている
-        gameObject1->setColor(ccRED);
-        gameObject2->setColor(ccBLUE);
-        deleteObject(gameObject1);
-        deleteObject(gameObject2);
-      }
-      
-      /**
-          省略
-      */
+    // Callback
+    void CollisionTestLayer::onCollide(CollisionPair& collisionPair){ // 当った際の処理
+      // ここでは当ったオブジェクトの色を赤と青に変更し、消す処理をしている
+      CCSprite *gameObject1 = (CCSprite*)collisionPair.getObject1();
+      CCSprite *gameObject2 = (CCSprite*)collisionPair.getObject2();
+      gameObject1->setColor(ccRED);
+      gameObject2->setColor(ccBLUE);
+      deleteObject(gameObject1);
+      deleteObject(gameObject2);
+    }
+ 
+    // Detect collision by bounding box
+    bool CollisionTestLayer::detectCollision(CCNode* collisionObject1, CCNode* collisionObject2){ // 当っているかを判定
+      return collisionObject1->boundingBox().intersectsRect(collisionObject2->boundingBox()); // 矩形が重なっていた場合は、当っているとする
     }
   ```
+***
