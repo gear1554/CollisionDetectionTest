@@ -11,8 +11,10 @@ CollisionDetectionクラスの動作確認、デモ用のプロジェクト
 
 
 ###CollisionDetectionクラスの使い方
+CCTableViewのような感じで利用できます。
 1. CollisionDetection.hとCollisionDetection.cppを使用したいプロジェクトへ追加
 2. ヘッダーへの定義、初期化を行う
+  - 画面にはCollisionDetactionDelegateクラスを継承させてください
   - コンストラクタの第1引数に判定を行いたい画面(CCLayer*)を指定してください
   - コンストラクタの第2引数に判定を行いたい対象の配列を指定してください
   - コンストラクタの第3引数に0～9の数値(空間の分割レベル)を指定してください(2～4推奨?)
