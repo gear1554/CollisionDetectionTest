@@ -13,13 +13,26 @@ CollisionDetectionクラスの動作確認、デモ用のプロジェクト
 ###CollisionDetectionクラスの使い方
 1. CollisionDetection.hとCollisionDetection.cppを使用したいプロジェクトへ追加
 2. ヘッダーへの定義、初期化を行う
-  - コンストラクタの第1引数に判定を行いたい対象の配列を指定してください
-  - コンストラクタの第2引数に0～9の数値(空間の分割レベル)を指定してください(2～4推奨?)
+  - コンストラクタの第1引数に判定を行いたい画面(CCLayer*)を指定してください
+  - コンストラクタの第2引数に判定を行いたい対象の配列を指定してください
+  - コンストラクタの第3引数に0～9の数値(空間の分割レベル)を指定してください(2～4推奨?)
 ***
  CollisionTestLayer.h
   ```C++
-    CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction);
-    CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);
+
+ class CollisionTestLayer :
+    public CCLayer,
+    public CCBSelectorResolver,
+    public CCBMemberVariableAssigner,
+    public CollisionDetactionDelegate // これを継承してください
+    {
+      private:
+      /**
+        省略
+      */
+  
+      CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction);
+      CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);
   ``` 
 ***
   CollisionTestLayer.cpp
@@ -27,7 +40,7 @@ CollisionDetectionクラスの動作確認、デモ用のプロジェクト
     gameObjects = CCArray::create();
     
     // Create collisionDetaction
-    collisionDetaction = new CollisionDetaction(gameObjects, 3);
+    collisionDetaction = new CollisionDetaction(this, gameObjects, 3);
   ```
 ***
 3. 毎フレーム処理を行う箇所でcollisionDetaction->update();を呼んでやる  
