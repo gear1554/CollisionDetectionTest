@@ -46,7 +46,7 @@ CCTableViewのような感じで利用できます。
     collisionDetaction = new CollisionDetaction(this, gameObjects, 3);
   ```
 ***
-3. 毎フレーム処理を行う箇所でcollisionDetaction->update();を呼んでください
+3. 毎フレーム処理を行う箇所でcollisionDetaction->update();を呼んでください  
   CollisionTestLayer.cpp
   ```C++
     // Inter-frame operation
