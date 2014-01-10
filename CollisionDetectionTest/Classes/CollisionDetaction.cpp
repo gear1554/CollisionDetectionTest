@@ -160,8 +160,7 @@ void CollisionDetaction::update(){
     // Update game objects's space status
     CCObject *obj;
     CCARRAY_FOREACH(gameObjectArray, obj){
-        CCSprite *collisionObject = (CCSprite*)obj;
-        updateSpaceStatus(collisionObject);
+        updateSpaceStatus((CCSprite*)obj);
     }
     
     // Scan collision detection
@@ -231,8 +230,7 @@ void CollisionDetaction::scanCollisionDetection(int spaceIndex, CCArray* stackAr
             if(!childFlag){
                 CCObject* obj;
                 CCARRAY_FOREACH(spaceCellArray, obj){
-                    CCNode *collisionObject = (CCNode*)obj;
-                    stackArray->addObject(collisionObject);
+                    stackArray->addObject((CCNode*)obj);
                 }
                 ObjNum += spaceCellArray->count();
             }
