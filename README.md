@@ -12,6 +12,7 @@ CollisionDetectionクラスの動作確認、デモ用のプロジェクト
 
 ###CollisionDetectionクラスの使い方
 CCTableViewのような感じで利用できます。  
+
 1. CollisionDetection.hとCollisionDetection.cppを使用したいプロジェクトへ追加
 2. ヘッダーへの定義、初期化を行う
   - 画面にはCollisionDetactionDelegateクラスを継承させてください
