@@ -34,8 +34,8 @@ CCTableViewのような感じで利用できます。
             省略
           */
   
-          CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction);
-          CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);
+          CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction); // こんな感じで宣言
+          CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);                // 当り判定チェックを行うオブジェクト格納用
   ``` 
 ***
   CollisionTestLayer.cpp
