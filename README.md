@@ -3,6 +3,7 @@ CollisionDetectionTest
 
 cocos2d-x上での当り判定走査を効率的に行う(判定回数を減らす)ための  
 CollisionDetectionクラスの動作確認、デモ用のプロジェクト  
+ビルド、実行すると[こちらの動画](http://youtu.be/w2FdtXfO11o)と同様のものが表示されます。
 
 ※cocos2d-xのバージョンは2.1.4前提です
 
