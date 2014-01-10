@@ -20,19 +20,19 @@ CollisionDetectionクラスの動作確認、デモ用のプロジェクト
  CollisionTestLayer.h
   ```C++
 
- class CollisionTestLayer :
-    public CCLayer,
-    public CCBSelectorResolver,
-    public CCBMemberVariableAssigner,
-    public CollisionDetactionDelegate // これを継承してください
-    {
-      private:
-      /**
-        省略
-      */
+     class CollisionTestLayer :
+        public CCLayer,
+        public CCBSelectorResolver,
+        public CCBMemberVariableAssigner,
+        public CollisionDetactionDelegate // これを継承してください
+        {
+          private:
+          /**
+            省略
+          */
   
-      CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction);
-      CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);
+          CC_SYNTHESIZE(CollisionDetaction*, collisionDetaction, CollisionDetaction);
+          CC_SYNTHESIZE(CCPointer<CCArray>, gameObjects, GameObjects);
   ``` 
 ***
   CollisionTestLayer.cpp
